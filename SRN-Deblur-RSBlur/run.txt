@@ -1,0 +1,43 @@
+# GoPro
+python run_model.py --phase=train --checkpoint_path=0719_SRN-Deblur_GoPro_ABME_with_ours --sat_synthesis=sat_synthesis --noise_synthesis=poisson_gamma --cam_params_RealBlur=1 --adopt_crf_realblur=1 --datalist=../datalist/GoPro/GoPro_INTER_ABME_train.txt --gpu=2
+python run_model.py --phase=train --checkpoint_path=0719_SRN-Deblur_U_with_ours --sat_synthesis=sat_synthesis --noise_synthesis=poisson_gamma --cam_params_RealBlur=1 --adopt_crf_realblur=1 --datalist=../datalist/GoPro/GoPro_U_train.txt --gpu=4
+
+# RealBlur
+python run_model.py --phase=train --checkpoint_path=0719_SRN-Deblur_Realblur_j --sat_synthesis=None --noise_synthesis=None --datalist=../datalist/RealBlur_J_train_list.txt --gpu=5
+
+# RSBlur
+python run_model.py --phase=train --checkpoint_path=0719_SRN-Deblur_RSBlur_real --sat_synthesis=None --noise_synthesis=None --datalist=../datalist/RSBlur/RSBlur_real_train.txt --gpu=6
+
+
+python run_model.py --phase=train --checkpoint_path=0719_SRN-Deblur_RSBlur_syn --sat_synthesis=None --noise_synthesis=None --datalist=../datalist/RSBlur/RSBlur_syn_train.txt --gpu=0
+python run_model.py --phase=train --checkpoint_path=0719_SRN-Deblur_RSBlur_syn_with_ours --sat_synthesis=sat_synthesis --noise_synthesis=poisson_RSBlur --cam_params_RSBlur=1 --datalist=../datalist/RSBlur/RSBlur_syn_train.txt --gpu=0
+
+
+test
+# RSBlur
+python run_model.py --phase=test --checkpoint_path=SRN-Deblur_RSBlur_real --datalist=../datalist/RSBlur/RSBlur_real_test.txt --gpu=0 --output_path=dataset/results_rsblur
+python run_model.py --phase=test --checkpoint_path=SRN-Deblur_RSBlur_syn --datalist=../datalist/RSBlur/RSBlur_real_test.txt --gpu=0 --output_path=dataset/results_rsblur
+python run_model.py --phase=test --checkpoint_path=SRN-Deblur_RSBlur_syn_with_ours --datalist=../datalist/RSBlur/RSBlur_real_test.txt --gpu=1 --output_path=dataset/results_rsblur
+
+# RealBlur
+python run_model.py --phase=test --checkpoint_path=SRN-Deblur_GoPro_ABME_with_ours --datalist=../datalist/RealBlur_J_test_list.txt --gpu=1 --output_path=dataset/results_realblur;
+python run_model.py --phase=test --checkpoint_path=SRN-Deblur_U_with_ours --datalist=../datalist/RealBlur_J_test_list.txt --gpu=2 --output_path=dataset/results_realblur;
+python run_model.py --phase=test --checkpoint_path=SRN-Deblur_Realblur_j --datalist=../datalist/RealBlur_J_test_list.txt --gpu=6 --output_path=dataset/results_realblur;
+
+
+evaluation
+python evaluate_RSBlur.py --input_dir=SRN-Deblur-RSBlur/testing_res/SRN-Deblur_RSBlur_real --gt_root=SRN-Deblur-RSBlur/dataset/RSBlur;
+python evaluate_RealBlur.py --input_dir=SRN-Deblur-RSBlur/testing_res/SRN-Deblur_U_with_ours --gt_root=SRN-Deblur-RSBlur/RealBlur-J_ECC_IMCORR_centroid_itensity_ref;
+
+python3 evaluate_RSBlur.py --input_dir=/data1/jsrim/train/results_cameraready_camerarsblur/SRN-Deblur_RSBlur_syn --gt_root=/data1/jsrim/train/RSBlur;
+
+
+cp /Bean/data/jsrim/RSBlur/RSBlur.zip ./
+cp /Bean/data/jsrim/RSBlur/GoPro_INTER_ABME.zip ./
+cp /Bean/data/jsrim/RSBlur/GoPro_U.zip ./
+
+python3 evaluate_RealBlur.py --input_dir=/data1/jsrim/train/results_cameraready_camerarealblur/SRN-Deblur_GoPro_ABME_with_ours --gt_root=/data1/jsrim/train/RealBlur-J_ECC_IMCORR_centroid_itensity_ref;python3 evaluate_RealBlur.py --input_dir=/data1/jsrim/train/results_cameraready_camerarealblur/SRN-Deblur_Realblur_j --gt_root=/data1/jsrim/train/RealBlur-J_ECC_IMCORR_centroid_itensity_ref;
+
+python3 evaluate_RealBlur.py --input_dir=/data1/jsrim/train/results_cameraready_camerarealblur/SRN-Deblur_GoPro_U_with_ours --gt_root=/data1/jsrim/train/RealBlur-J_ECC_IMCORR_centroid_itensity_ref;
+
+python3 evaluate_RSBlur.py --input_dir=/data1/jsrim/train/results_rsblur/0716_RSBlur_real/ --gt_root=train/RealBlur-v2_1025_ABME --core=24
