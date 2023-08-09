@@ -55,14 +55,16 @@ class RealisticGoProABMEDataset(Dataset):
 
     def __getitem__(self, idx):
 
-        # read a sharp image
+        # read sharp image
         label = cv2.imread(self.image_list[idx].replace('/avg_inter_img/avg_blur.png', '/gt/gt_sharp.png'),
                            cv2.IMREAD_COLOR).astype('float32') / 255
         label = cv2.cvtColor(label, cv2.COLOR_BGR2RGB)
 
+        # read blurred image
         blurred = cv2.imread(self.image_list[idx], cv2.IMREAD_COLOR).astype('float32') / 255
         blurred = cv2.cvtColor(blurred, cv2.COLOR_BGR2RGB)
 
+        # read saturation mask
         sat_mask = cv2.imread(self.image_list[idx].replace('/avg_inter_img/', '/avg_inter_mask_100/'),
                               cv2.IMREAD_COLOR).astype('float32') / 255
         sat_mask = cv2.cvtColor(sat_mask, cv2.COLOR_BGR2RGB)
@@ -73,6 +75,7 @@ class RealisticGoProABMEDataset(Dataset):
         sat_mask_pt = torch.from_numpy(sat_mask).float()
 
         # random crop
+        # Due to artifacts of demosaic on edges, we crop bigger images.
         boundary_size = 8
         ps = self.ps + boundary_size
         hh, ww = label_pt.shape[0], label_pt.shape[1]
@@ -133,6 +136,8 @@ class RealisticGoProABMEDataset(Dataset):
                 sat_mask_pt = torch.rot90(sat_mask_pt.flip(1), dims=(0, 1))
 
         if not self.realistic_pipeline:
+
+            # Naive synthesis
             blurred = blurred_pt
             gt = label_pt
 
@@ -253,11 +258,13 @@ class RealisticGoProUDataset(Dataset):
             'float32') / 255
         label = cv2.cvtColor(label, cv2.COLOR_BGR2RGB)
 
+        # read a blurred image
         blurred = cv2.imread(os.path.join(self.image_dir, 'centroid_blurred_img', self.image_list[idx]),
                              cv2.IMREAD_COLOR).astype(
             'float32') / 255
         blurred = cv2.cvtColor(blurred, cv2.COLOR_BGR2RGB)
 
+        # read a saturation mask
         sat_mask = cv2.imread(os.path.join(self.image_dir, 'centroid_blurred_mask_100', self.image_list[idx]),
                               cv2.IMREAD_COLOR).astype(
             'float32') / 255
@@ -269,6 +276,7 @@ class RealisticGoProUDataset(Dataset):
         sat_mask_pt = torch.from_numpy(sat_mask).float()
 
         # random crop
+        # Due to artifacts of demosaic on edges, we crop bigger images.
         boundary_size = 8
         ps = self.ps + boundary_size
         hh, ww = label_pt.shape[0], label_pt.shape[1]
