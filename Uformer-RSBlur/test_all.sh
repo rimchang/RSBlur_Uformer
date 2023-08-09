@@ -1,0 +1,7 @@
+#!/bin/bash
+#CUDA_VISIBLE_DEVICES=5 python3 test/test_realblur_reflect.py --input_dir ./datasets/ --result_dir ./results/Uformer_B_RealisticUniformDeblur/ --weights ./logs/motiondeblur/GoPro/Uformer_B_RealisticUniformDeblur/models/model_epoch_500.pth;
+#CUDA_VISIBLE_DEVICES=5 python3 test/test_realblur_reflect.py --input_dir ./datasets/ --result_dir ./results/Uformer_B_NaiveUniformDeblur/ --weights ./logs/motiondeblur/GoPro/Uformer_B_NaiveUniformDeblur/models/model_epoch_500.pth;
+#CUDA_VISIBLE_DEVICES=5 python3 test/test_realblur_reflect.py --input_dir ./datasets/ --result_dir ./results/Uformer_B_RealisticUniformV2Deblur/ --weights ./logs/motiondeblur/GoPro/Uformer_B_RealisticUniformV2Deblur/models/model_epoch_500.pth;
+CUDA_VISIBLE_DEVICES=5 python3 test/test_realblur_reflect.py --input_dir ./datasets/ --result_dir ./results/Uformer_B_RealisticGoProUDeblur/ --weights ./logs/motiondeblur/GoPro/Uformer_B_RealisticGoProUDeblur/models/model_epoch_150.pth;
+CUDA_VISIBLE_DEVICES=5 python3 test/test_realblur_reflect.py --input_dir ./datasets/ --result_dir ./results/Uformer_B_NaiveGoProUDeblur/ --weights ./logs/motiondeblur/GoPro/Uformer_B_NaiveGoProUDeblur/models/model_epoch_150.pth;
+CUDA_VISIBLE_DEVICES=5 python3 test/test_realblur_reflect.py --input_dir ./datasets/ --result_dir ./results/Uformer_B_RealisticGoProABMEDeblur_mark9/ --weights ./logs/motiondeblur/GoPro/Uformer_B_RealisticGoProABMEDeblur_mark9/models/model_epoch_1500.pth;
