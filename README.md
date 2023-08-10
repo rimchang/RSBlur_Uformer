@@ -79,15 +79,15 @@ class RealisticGoProUataset(Dataset):
 # require two of 3090, 4~5 days
 
 # GoPro_INTER_ABME with our pipeline
-python3 ../Uformer-RSBlur/train/train_RealisticGoProABMEDeblur.py --arch Uformer_B --batch_size 8 --gpu '0,1' \
- --train_ps 256 --train_dir ../Uformer-RSBlur/datasets/GOPRO_INTER_ABME \
- --val_ps 256 --val_dir ../Uformer-RSBlur/datasets/RealBlurJ_test --env _RealisticGoProABMEDeblur \
+python3 train/train_RealisticGoProABMEDeblur.py --arch Uformer_B --batch_size 8 --gpu '0,1' \
+ --train_ps 256 --train_dir datasets/GOPRO_INTER_ABME \
+ --val_ps 256 --val_dir datasets/RealBlurJ_test --env _RealisticGoProABMEDeblur \
  --mode deblur --nepoch 1500 --checkpoint 100 --dataset GoPro --warmup --train_workers 12
 
 # GoPro_U with our pipeline
-python3 ../Uformer-RSBlur/train/train_RealisticGoProUDeblur.py --arch Uformer_B --batch_size 8 --gpu '0,1' \
- --train_ps 256 --train_dir ../Uformer-RSBlur/datasets/GOPRO_INTER_ABME \
- --val_ps 256 --val_dir ../Uformer-RSBlur/datasets/RealBlurJ_test --env _RealisticGoProUDeblur \
+python3 train/train_RealisticGoProUDeblur.py --arch Uformer_B --batch_size 8 --gpu '0,1' \
+ --train_ps 256 --train_dir datasets/GOPRO_INTER_ABME \
+ --val_ps 256 --val_dir datasets/RealBlurJ_test --env _RealisticGoProUDeblur \
  --mode deblur --nepoch 1500 --checkpoint 100 --dataset GoPro --warmup --train_workers 12
 
 ```
