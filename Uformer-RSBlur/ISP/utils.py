@@ -14,6 +14,9 @@ dir_name = os.path.dirname(os.path.abspath(__file__))
 xyz2cam_realblur = scipy.io.loadmat(dir_name + '/mat_collections/a7r3_xyz2cam.mat')['final_xyz2cam'].astype('float32')
 cam2xyz_realblur = scipy.io.loadmat(dir_name + '/mat_collections/a7r3_cam2xyz.mat')['final_cam2xyz'].astype('float32')
 
+cam2xyz_realblur_right = cam2xyz_realblur.transpose(1, 0)
+xyz2cam_realblur_right = xyz2cam_realblur.transpose(1, 0)
+
 alpha_realblur = scipy.io.loadmat(dir_name + '/mat_collections/a7r3_polynomial_alpha.mat')['alpha'].astype('float32')
 alpha_realblur_rgb2lin = scipy.io.loadmat(dir_name + '/mat_collections/a7r3_polynomial_alpha_srgb2lin.mat')['alpha'].astype('float32')
 
