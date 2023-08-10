@@ -12,10 +12,10 @@
 
 | Models | Train set | Realistic Pipeline | PSNR / SSIM    |
 | :---:|:---:  |  :---:|:---:|
-| Uformer-B |   GoPro |     | 29.08 / 0.8754 |
-| Uformer-B |  GoPro  |✓     | 30.98 / 0.9067 |
-| Uformer-B | GoPro_U |     | 31.19 / 0.9143 |
-| Uformer-B | GoPro_U |  ✓   | 28.93 / 0.8673 |
+| Uformer-B |   GoPro |  ✓   | 30.98 / 0.9067 |
+| Uformer-B |  GoPro  |     | 29.08 / 0.8754 |
+| Uformer-B | GoPro_U |   ✓  | 31.19 / 0.9143 |
+| Uformer-B | GoPro_U |     | 28.93 / 0.8673 |
 
 
 ## Installation 
