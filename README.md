@@ -32,9 +32,6 @@ We recommend a virtual environment using conda or docker.
 - Pytorch 1.9.0
 - cuda11.1
 
-## Download
-
-
 ### Pre-trained models [[Google Drive]](https://drive.google.com/drive/folders/1JcYNvIKflIaSxbD2Jn98FzGcWyAvWxoW?usp=drive_link)
 <details>
 <summary><strong>Descriptions</strong> (click) </summary>
@@ -44,6 +41,35 @@ We recommend a virtual environment using conda or docker.
 - Uformer_B_RealisticGoProUDeblur.pth : Trained on GoPro_U with our synthesis pipeline.
 - Uformer_B_NaiveGoProUDeblur.pth : Trained on GoPro_U in the Naive way.
 </details>
+
+## RSBlur pipeline
+
+We provide Dataset modules for adopting our pipline.
+Please check the below codes.
+
+```python
+# ./Uformer-RSBlur/dataset/dataset_RealisticDeblur.py
+
+class RealisticGoProABMEDataset(Dataset):
+    def __init__(self, image_dir, patch_size=256, image_aug=True, realistic_pipeline=True):
+        ...
+
+    def __len__(self):
+        return len(self.image_list)
+
+    def __getitem__(self, idx):
+        ...
+
+class RealisticGoProUataset(Dataset):
+    def __init__(self, image_dir, patch_size=256, image_aug=True, realistic_pipeline=True):
+        ...
+
+    def __len__(self):
+        return len(self.image_list)
+
+    def __getitem__(self, idx):
+        ...
+```
 
 ## Training
 
